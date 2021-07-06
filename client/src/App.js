@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import MovieList from "./Movies/MovieList";
+import Movie from "./Movies/Movie";
 
 import SavedList from './Movies/SavedList';
+import { Route } from 'react-router-dom';
 
 const App = () => {
   const [savedList, setSavedList] = useState( [] );
@@ -10,11 +13,27 @@ const App = () => {
   };
 
   return (
-    <div>
+ <> 
       <SavedList list={savedList} />
-      <div>Replace this Div with your Routes</div>
-    </div>
-  );
-};
+    <div>
+      
+       <Route exact path='/'
+        component={MovieList} />
+        {/* // render={props => <MovieList {...props} movie={movies} />} /> */}
 
-export default App;
+       <Route exact path='/movie:id'
+        render={props => <Movie {...props} movies={savedList} />} />
+
+     </div>
+        </>   
+     
+     );
+   };
+   
+   export default App;
+   
+   
+   
+   // const item = props.items.find(
+//     thing => `${thing.id}` === props.match.params.id
+//   );
